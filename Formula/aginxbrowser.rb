@@ -54,15 +54,15 @@ class Aginxbrowser < Formula
       end
       flunk "server did not bind within 90s" unless ok
       body = `curl -fsS http://127.0.0.1:#{port}/health`
-      assert_match /"status":"ok"/, body
+      assert_match(/"status":"ok"/, body)
     ensure
       begin
         Process.kill("TERM", pid)
-      rescue
+      rescue Errno::ESRCH
       end
       begin
         Process.wait(pid)
-      rescue
+      rescue Errno::ECHILD
       end
     end
   end
