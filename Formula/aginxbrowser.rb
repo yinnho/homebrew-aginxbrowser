@@ -4,19 +4,17 @@ class Aginxbrowser < Formula
   version "0.2.1"
   license "Apache-2.0"
 
-  on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.1/aginxbrowser-v0.2.1-aarch64-apple-darwin.tar.gz"
-      sha256 "a75641c668997dbbc2ac7fc2cab65c0f55324a098f62f5da8e6a1e80a0b7bdcb"
-    else
-      url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.1/aginxbrowser-v0.2.1-x86_64-apple-darwin.tar.gz"
-      sha256 "e59b7f83b99d6eace3c1d79368bdf0997ed2ce2724ac15da61e36e3dc3f7224e"
-    end
-  end
-
-  on_linux do
+  if OS.mac? && Hardware::CPU.arm?
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.1/aginxbrowser-v0.2.1-aarch64-apple-darwin.tar.gz"
+    sha256 "a75641c668997dbbc2ac7fc2cab65c0f55324a098f62f5da8e6a1e80a0b7bdcb"
+  elsif OS.mac? && Hardware::CPU.intel?
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.1/aginxbrowser-v0.2.1-x86_64-apple-darwin.tar.gz"
+    sha256 "e59b7f83b99d6eace3c1d79368bdf0997ed2ce2724ac15da61e36e3dc3f7224e"
+  elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.1/aginxbrowser-v0.2.1-x86_64-unknown-linux-gnu.tar.gz"
     sha256 "e3aca5a9d5c106e8c95e75f50f0682916e1df2309de043ade10d970c29a822eb"
+  else
+    odie "aginxbrowser only ships prebuilt binaries for macOS arm64/intel and Linux x86_64"
   end
 
   def install
@@ -51,7 +49,7 @@ class Aginxbrowser < Formula
           s.close
           ok = true
           break
-        rescue StandardError
+        rescue
           next
         end
       end
