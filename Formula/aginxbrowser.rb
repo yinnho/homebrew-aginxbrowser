@@ -38,22 +38,26 @@ class Aginxbrowser < Formula
   test do
     require "socket"
     port = free_port
-    env = { "AGINXBROWSER_BIND" => "127.0.0.1:#{port}" }
-    pid = spawn(env, "#{bin}/aginxbrowser")
+    server = TCPServer.new("127.0.0.1", port)
+    server.close
+
+    pid = spawn({ "AGINXBROWSER_BIND" => "127.0.0.1:#{port}" }, "#{bin}/aginxbrowser", err: "/dev/null")
     begin
-      # The binary warms up V8 before binding; poll the health endpoint.
       ok = false
-      60.times do
+      90.times do
         sleep 1
         begin
-          body = File.popen("curl -fsS http://127.0.0.1:#{port}/health 2>/dev/null", &:read)
-          ok = !body.to_s.empty?
-          break if ok
+          s = TCPSocket.new("127.0.0.1", port)
+          s.close
+          ok = true
+          break
         rescue StandardError
           next
         end
       end
-      assert_match "ok", `curl -fsS http://127.0.0.1:#{port}/health`
+      flunk "server did not bind within 90s" unless ok
+      body = `curl -fsS http://127.0.0.1:#{port}/health`
+      assert_match %r{"status":"ok"}, body
     ensure
       Process.kill("TERM", pid) rescue nil
       Process.wait(pid) rescue nil
