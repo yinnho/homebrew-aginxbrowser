@@ -1,7 +1,6 @@
 class Aginxbrowser < Formula
   desc "Agent-first browser server: HTTP API + MCP, no Chromium"
   homepage "https://github.com/yinnho/aginxbrowser"
-  version "0.2.1"
   license "Apache-2.0"
 
   if OS.mac? && Hardware::CPU.arm?
@@ -55,10 +54,16 @@ class Aginxbrowser < Formula
       end
       flunk "server did not bind within 90s" unless ok
       body = `curl -fsS http://127.0.0.1:#{port}/health`
-      assert_match %r{"status":"ok"}, body
+      assert_match /"status":"ok"/, body
     ensure
-      Process.kill("TERM", pid) rescue nil
-      Process.wait(pid) rescue nil
+      begin
+        Process.kill("TERM", pid)
+      rescue
+      end
+      begin
+        Process.wait(pid)
+      rescue
+      end
     end
   end
 end
