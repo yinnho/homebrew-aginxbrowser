@@ -5,13 +5,13 @@ class Aginxbrowser < Formula
 
   if OS.mac? && Hardware::CPU.arm?
     url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.3/aginxbrowser-v0.2.3-aarch64-apple-darwin.tar.gz"
-    sha256 "82d1ad670433aa8ab08032365050debe7721a4b7971dedd88d3901bfcbf5cb29"
+    sha256 "7ee1aef543e65e08acd0b7c012391fbc937c6505945e181ab2f7a03e46d05eb3"
   elsif OS.mac? && Hardware::CPU.intel?
     url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.3/aginxbrowser-v0.2.3-x86_64-apple-darwin.tar.gz"
-    sha256 "be237fdffb59bb0bcd8376946cce9efa7545e54f773b740fd917d97cad11118f"
+    sha256 "296ff4938b9b27cc771fb0c8e9f44d7cd0c57a9f0a1b26f1589c2528913b1ce3"
   elsif OS.linux? && Hardware::CPU.intel?
     url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.3/aginxbrowser-v0.2.3-x86_64-unknown-linux-gnu.tar.gz"
-    sha256 "5c1c115a0703088abf4ff1d6e4186d0cf02c610b73b0aeae305e44751bc9468e"
+    sha256 "e3bc6d665ecf40ba64d724990c67d9694a45a3427a9a672825322e8bbf8ea17b"
   else
     odie "aginxbrowser only ships prebuilt binaries for macOS arm64/intel and Linux x86_64"
   end
