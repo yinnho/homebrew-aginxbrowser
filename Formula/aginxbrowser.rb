@@ -59,10 +59,12 @@ class Aginxbrowser < Formula
       begin
         Process.kill("TERM", pid)
       rescue Errno::ESRCH
+        nil
       end
       begin
         Process.wait(pid)
       rescue Errno::ECHILD
+        nil
       end
     end
   end
