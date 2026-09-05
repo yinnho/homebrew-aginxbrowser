@@ -4,14 +4,14 @@ class Aginxbrowser < Formula
   license "Apache-2.0"
 
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.7/aginxbrowser-v0.2.7-aarch64-apple-darwin.tar.gz"
-    sha256 "27e680d95998a9df16d690918127fcf4e4c93c68e2caf50d9f57b337baef9a72"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.8/aginxbrowser-v0.2.8-aarch64-apple-darwin.tar.gz"
+    sha256 "62afaacb48b29e77b0fe33fb68b9fd8fe4b70799b08030a733e95676ad0fa218"
   elsif OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.7/aginxbrowser-v0.2.7-x86_64-apple-darwin.tar.gz"
-    sha256 "c066be4e7d33a020e9f1d48013fa80c98a9e486926907693afbcffd1a58899a8"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.8/aginxbrowser-v0.2.8-x86_64-apple-darwin.tar.gz"
+    sha256 "7b5a180960571b30f21c1caa686c67fd121e8c4f83bc338d3cf4e350405f2fca"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.7/aginxbrowser-v0.2.7-x86_64-unknown-linux-gnu.tar.gz"
-    sha256 "6f053dbd11c98c99786dc99de2d2d6791e60e981bb54630d779674dae5d839a7"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.8/aginxbrowser-v0.2.8-x86_64-unknown-linux-gnu.tar.gz"
+    sha256 "dd4aab2b37499e839f9891a6d073a0c210b36056a5a9f20e4527ffe8482572f1"
   else
     odie "aginxbrowser only ships prebuilt binaries for macOS arm64/intel and Linux x86_64"
   end
