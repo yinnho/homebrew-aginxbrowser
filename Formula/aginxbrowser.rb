@@ -4,16 +4,19 @@ class Aginxbrowser < Formula
   license "Apache-2.0"
 
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.10/aginxbrowser-v0.2.10-aarch64-apple-darwin.tar.gz"
-    sha256 "afd6557fa4485ba626305f9f166b1518fdac0cf0811025dbb160ebd961665bbf"
-  elsif OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.10/aginxbrowser-v0.2.10-x86_64-apple-darwin.tar.gz"
-    sha256 "70ede02e171b1f0a6a12eb8f0b9b93fb631cc95a9ad2976da046419fe474cb85"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.11/aginxbrowser-v0.2.11-aarch64-apple-darwin.tar.gz"
+    sha256 "a6e145f8a2efc697aa728f49f94669cfd2fe37fedd200e77330378ae8c2d2a45"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.10/aginxbrowser-v0.2.10-x86_64-unknown-linux-gnu.tar.gz"
-    sha256 "418ba46ed4b4e60903194fa78129e388a54d8e2d283d87f290ea2706bd560f09"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.2.11/aginxbrowser-v0.2.11-x86_64-unknown-linux-gnu.tar.gz"
+    sha256 "a24a2d7a0c545b21d76d819be38e65bebad6872c77d3773b4db9d288878c30ba"
   else
-    odie "aginxbrowser only ships prebuilt binaries for macOS arm64/intel and Linux x86_64"
+    odie <<~EOS
+      aginxbrowser ships prebuilt binaries for macOS arm64 and Linux x86_64.
+      On macOS Intel the prebuilt asset was dropped: a V8 snapshot architecture
+      defect made every prior Intel asset crash on launch. Build from source:
+        git clone https://github.com/yinnho/aginxbrowser && cd aginxbrowser
+        cargo build --release --features stealth,screenshot
+    EOS
   end
 
   def install
@@ -37,7 +40,6 @@ class Aginxbrowser < Formula
     port = free_port
     server = TCPServer.new("127.0.0.1", port)
     server.close
-
     pid = spawn({ "AGINXBROWSER_BIND" => "127.0.0.1:#{port}" }, "#{bin}/aginxbrowser", err: "/dev/null")
     begin
       ok = false
