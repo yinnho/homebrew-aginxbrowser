@@ -4,11 +4,11 @@ class Aginxbrowser < Formula
   license "Apache-2.0"
 
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.21/aginxbrowser-v0.5.21-aarch64-apple-darwin.tar.gz"
-    sha256 "94d0b11c76dd36c2ae8437a4db1f10a733319bbdf9c5c100ae42c8f1d29c1a99"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.22/aginxbrowser-v0.5.22-aarch64-apple-darwin.tar.gz"
+    sha256 "b9f507070ebd6d8e813e22fe3cea477b181a95395f0d346c2dbedeb899bcf4e8"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.21/aginxbrowser-v0.5.21-x86_64-unknown-linux-gnu.tar.gz"
-    sha256 "103ed7d2a50c562c827f260d6f7533add7699070c92c0b0cdaec73f507c95231"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.22/aginxbrowser-v0.5.22-x86_64-unknown-linux-gnu.tar.gz"
+    sha256 "5ddc5008e642d513a36e7c3df4a1d73d4860eee6d1d22c9dc687391b4f7ad20e"
   else
     odie <<~EOS
       aginxbrowser ships prebuilt binaries for macOS arm64 and Linux x86_64.
