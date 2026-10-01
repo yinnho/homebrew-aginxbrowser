@@ -71,4 +71,3 @@ class Aginxbrowser < Formula
     end
   end
 end
-
