@@ -1,14 +1,14 @@
 class Aginxbrowser < Formula
-  desc "Agent-first browser server: HTTP API + MCP, no Chromium"
+  desc "Agent-first browser server: HTTP API over the diting engine, no Chromium"
   homepage "https://github.com/yinnho/aginxbrowser"
   license "Apache-2.0"
 
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.31/aginxbrowser-v0.5.31-aarch64-apple-darwin.tar.gz"
-    sha256 "6ce6a94f729fbfa4b5461fdedebb5050b35404f8a83563c7d6c63c98c6201c7c"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.32/aginxbrowser-v0.5.32-aarch64-apple-darwin.tar.gz"
+    sha256 "9ba827af9856bca052ca5abf2500879b32a6ee717ba6aaf1139bb47597a65f1f"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.31/aginxbrowser-v0.5.31-x86_64-unknown-linux-gnu.tar.gz"
-    sha256 "6006ce3d88fdcc640d5c328cc1d464bc18bc2d1c2b3292c44baec3cb6b2f54e2"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.32/aginxbrowser-v0.5.32-x86_64-unknown-linux-gnu.tar.gz"
+    sha256 "a491f46dfcdfea16a9fa536aacb3f520b7ffc4d5a97ca154f6d7a5430046421a"
   else
     odie <<~EOS
       aginxbrowser ships prebuilt binaries for macOS arm64 and Linux x86_64.
@@ -27,11 +27,10 @@ class Aginxbrowser < Formula
   def caveats
     <<~EOS
       Run the server:
-        aginxbrowser                 # HTTP API on :8089 (REST + CDP + /v1/scrape)
-        aginxbrowser --mcp           # native MCP over stdio
+        aginxbrowser                 # HTTP API on :8089 (REST + /v1/scrape + /flow/run)
 
-      Register with Claude / Cursor (hosted instance):
-        claude mcp add aginxbrowser --transport http https://browser.aginx.net/mcp
+      Bundled workflows (X, xhs, taobao/doudian publish & login, ...) live in
+      the release tarball's workflow/ dir; drop them into ~/.aginxbrowser/workflow/.
     EOS
   end
 
