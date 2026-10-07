@@ -4,16 +4,21 @@ class Aginxbrowser < Formula
   license "Apache-2.0"
 
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.36/aginxbrowser-v0.5.36-aarch64-apple-darwin.tar.gz"
-    sha256 "d2ff56d3dbf2cced4147ec9b947441553ae64a5c959480b9393ce053f5ff44ff"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.37/aginxbrowser-v0.5.37-aarch64-apple-darwin.tar.gz"
+    sha256 "f243fa2ebb9a74dab5af1e3129d673031302464b635ac332188a3b9fd91b4718"
+  elsif OS.mac? && Hardware::CPU.intel?
+    # Back as of v0.5.37: the release pipeline runs its whole toolchain as an
+    # x86_64 host under Rosetta, so the baked V8 snapshot matches the target,
+    # and the smoke step boots the real artifact before it ships.
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.37/aginxbrowser-v0.5.37-x86_64-apple-darwin.tar.gz"
+    sha256 "0cc64bb89473636b9ad8cd42f33f8935bcf275886d411642fe3d12e746aeebd4"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.36/aginxbrowser-v0.5.36-x86_64-unknown-linux-gnu.tar.gz"
-    sha256 "96e2073e6b20bd7898c95de8df668c26fab18e3d5d647130b54b9fc0155ef4c6"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.37/aginxbrowser-v0.5.37-x86_64-unknown-linux-gnu.tar.gz"
+    sha256 "8ea586b9c62033bb7ef321ee26e11ba6d85f3ae53d5f8ae96646f7d98bdf4428"
   else
     odie <<~EOS
-      aginxbrowser ships prebuilt binaries for macOS arm64 and Linux x86_64.
-      On macOS Intel the prebuilt asset was dropped: a V8 snapshot architecture
-      defect made every prior Intel asset crash on launch. Build from source:
+      aginxbrowser ships prebuilt binaries for macOS (arm64 and Intel) and
+      Linux x86_64. Build from source on anything else:
         git clone https://github.com/yinnho/aginxbrowser && cd aginxbrowser
         cargo build --release --features stealth,screenshot
     EOS
