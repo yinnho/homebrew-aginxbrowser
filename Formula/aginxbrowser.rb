@@ -4,17 +4,17 @@ class Aginxbrowser < Formula
   license "Apache-2.0"
 
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.38/aginxbrowser-v0.5.38-aarch64-apple-darwin.tar.gz"
-    sha256 "c6f817d1cf7093a9340d4bc9aa4fe5423662090196fa423bf2c5e19ef3893c53"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.39/aginxbrowser-v0.5.39-aarch64-apple-darwin.tar.gz"
+    sha256 "1e69704e4616758825ff3b123c7da738e0f0740c8d3b4f87df94bced96e5bb78"
   elsif OS.mac? && Hardware::CPU.intel?
     # Back as of v0.5.37: the release pipeline runs its whole toolchain as an
     # x86_64 host under Rosetta, so the baked V8 snapshot matches the target,
     # and the smoke step boots the real artifact before it ships.
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.38/aginxbrowser-v0.5.38-x86_64-apple-darwin.tar.gz"
-    sha256 "f0943a641ec2fa0b508cb02525a88d51637ce694cc109e6431407435a0a8521f"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.39/aginxbrowser-v0.5.39-x86_64-apple-darwin.tar.gz"
+    sha256 "ec6a440e644716beb4830ac6a7f73a4019be962a68f9e0831fd60a2190f575ea"
   elsif OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.38/aginxbrowser-v0.5.38-x86_64-unknown-linux-gnu.tar.gz"
-    sha256 "a7ccc938f9a9e609c5151e4d4e68d0c3a9f688b8ee6dbab641862aa04d19b6d5"
+    url "https://github.com/yinnho/aginxbrowser/releases/download/v0.5.39/aginxbrowser-v0.5.39-x86_64-unknown-linux-gnu.tar.gz"
+    sha256 "bac28059d489d122687f712586314824a59d317c52ab7b587cf16f717c96772c"
   else
     odie <<~EOS
       aginxbrowser ships prebuilt binaries for macOS (arm64 and Intel) and
